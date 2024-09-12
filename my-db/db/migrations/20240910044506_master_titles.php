@@ -35,6 +35,7 @@ final class MasterTitles extends AbstractMigration
                 'update' => 'CURRENT_TIMESTAMP'
             ])
               ->create();
+        
     }
     public function down()
     {

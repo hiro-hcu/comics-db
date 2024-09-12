@@ -22,7 +22,7 @@ final class MasterChapter extends AbstractMigration
         echo'upの方だよ<br/>';
 
         $table = $this->table('mst_chapters');
-        $table->addColumn('title_id', 'integer', ['null'=>false])
+        $table->addColumn('title_id', 'integer', ['null'=>false, 'signed'=> false,'default'=> false])
               ->addColumn('name', 'string', ['limit' =>255, 'null'=>false])
               ->addColumn('start_date', 'datetime',['null'=>false])
               ->addColumn('created_at', 'timestamp', [
@@ -34,6 +34,11 @@ final class MasterChapter extends AbstractMigration
                 'default' => 'CURRENT_TIMESTAMP',
                 'update' => 'CURRENT_TIMESTAMP'
             ])
+            ->addForeignKey('title_id', 'mst_titles', 'id',[
+                'delete'=> 'SET_NULL',
+                'update'=> 'NO_ACTION',
+            ]
+            )
               ->create();
     }
     public function down()
